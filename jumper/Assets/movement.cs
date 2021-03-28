@@ -13,6 +13,7 @@ public class movement : Agent
     public float exaggeration;
     public float reward;
     public Transform target;
+    public bool play;
 
 
     void OnCollisionStay(Collision collision)
@@ -46,6 +47,8 @@ public class movement : Agent
     // Update is called once per frame
     void Update()
     {
+
+        if (play == true){
         Vector3 direction = new Vector3(0.0f,0.0f,0.0f);
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -94,12 +97,15 @@ public class movement : Agent
         
     }
 
-
+    }
 
 
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+
+        if (play == false){
+
         var actionZ = 2f * Mathf.Clamp(actionBuffers.DiscreteActions[0], -1f, 1f);
         var actionX = 2f * Mathf.Clamp(actionBuffers.DiscreteActions[1], -1f, 1f);
 
@@ -112,6 +118,7 @@ public class movement : Agent
 
         Vector3 direction = new Vector3(0.0f,0.0f,0.0f);
 
+        print("text");
         print(w);
 
 
@@ -157,5 +164,5 @@ public class movement : Agent
         SetReward(reward);
         reward = exaggeration/1000;
     }
-
+    }
 }
